@@ -1,6 +1,8 @@
 # wm-flask
 
-This simple server provides a route to a `/session` endpoint & a `/session.js` to present the necessary session creation javascript.
+This simple server provides a route to a `/session` endpoint & a `/create_session.js` to present the necessary session creation javascript.
+
+This is a sample server based on the code running behind the scenes of [Audiotarky](https://www.audiotarky.com).
 
 ## Setup
 
@@ -28,6 +30,10 @@ API_URL = https://wm.vanilla.so/graphql
 SECRET = SESSION_SECRET
 ```
 
-## Coming soo
+## Use
+
+You will want the server to present the `/create_session.js` front end code, which the UI will then use to create a session. Your application code can then check the `has_wm_client` session variable to see if the client has streamed a payment through your receipt verification proxy, and serve content accordingly.
+
+## Coming soon
 
 Supporting the [WM.org receipt verifier](https://webmonetization.org/docs/receipt-verifier).

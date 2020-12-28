@@ -16,7 +16,7 @@ def make_session():
     """Create a session if the client iw WM enabled."""
     proof = prove(request)
     if proof:
-        session['clientId'] = proof['metadata']['clientId']
+        session['has_wm_client'] = proof['metadata']['clientId']
         return 'session created'
     else:
         raise PaymentRequired()
