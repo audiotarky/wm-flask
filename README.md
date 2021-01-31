@@ -34,6 +34,12 @@ SECRET = SESSION_SECRET
 
 You will want the server to present the `/create_session.js` front end code, which the UI will then use to create a session. Your application code can then check the `has_wm_client` session variable to see if the client has streamed a payment through your receipt verification proxy, and serve content accordingly.
 
+### Demo use
+
+```
+python server.py
+```
+
 ## Coming soon
 
 Supporting the [WM.org receipt verifier](https://webmonetization.org/docs/receipt-verifier).

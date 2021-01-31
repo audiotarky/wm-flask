@@ -15,7 +15,6 @@ def get_config():
     """Read the application config ini file."""
     config = configparser.ConfigParser()
     cfg_path = os.environ.get('WM_CONFIG_FILE', norm_path('server_config.ini'))
-    print(cfg_path)
     config.read(cfg_path)
     return config
 

@@ -10,13 +10,14 @@ from werkzeug.exceptions import HTTPException
 
 CONFIG = get_config()
 
-app = Flask(__name__)
+def prove(request, app):
+    """
+    Prove that a WM payment has occurred.
 
-def prove(request):
-    """Prove that a WM payment has occurred."""
+    request is the deserialised JSON WM receipt object
+    """
     try:
-        request_id = request.data.decode('utf-8')
-
+        request_id = request['requestId']
         query = f'''{{
         proof(requestId: "{request_id}") {{
             total
@@ -28,8 +29,10 @@ def prove(request):
             }}
         }}
     }}'''  # noqa: Q001
+        app.logger.info(f'query: {query}')
+
         response = requests.post(
-            CONFIG['vanilla']['APIURL'],
+            CONFIG['vanilla']['API_URL'],
             json={'query': query},
             headers= {
                 'Content-Type': 'application/json',
@@ -38,6 +41,7 @@ def prove(request):
         )
         response.raise_for_status()
         proof = response.json()
+        app.logger.info(f'proof: {proof}')
         if proof['data']['proof']['metadata']:
             return proof['data']['proof']
     except Exception as e:
